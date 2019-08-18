@@ -1,10 +1,12 @@
 <template>
   <div>
-    <v-carousel cycle height="50" hide-delimiters :show-arrows="false">
+    <v-carousel cycle height="40" hide-delimiters :show-arrows="false">
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
         <v-sheet :color="colors[i]" height="100%">
           <v-row class="fill-height" align="center" justify="center">
-            <div id="text" class="display-2">{{ slide }}</div>
+            <v-icon medium id="slide-icon" v-text="slide.icon"></v-icon>
+            <div v-html="slide.msg" id="text" class="display-2"></div>
+            <v-icon medium id="slide-icon" v-text="slide.icon"></v-icon>
           </v-row>
         </v-sheet>
       </v-carousel-item>
@@ -18,9 +20,21 @@ export default {
     return {
       colors: ["success", "primary", "red lighten-1"],
       slides: [
-        "ATTENTION PLAYERS! - SEASON 1 BEGINS ON SEPTEMBER 20TH, 2019",
-        "CONGRATULATIONS TO THE DONG STOMPERS ON WINNING THE SEASON ONE SPL PREMIERE LEAGUE CHAMPIONSHIP!!!",
-        "ATTENTION PLAYERS! - SIGNUPS FOR SEASON 2 WILL LOCK ON JANUARY 2ND 2019 AT 8PM"
+        {
+          icon: "mdi-clipboard-text-outline",
+          msg:
+            "<STRONG>ATTENTION:</STRONG> SEASON ONE SIGNUPS WILL UNLOCK ON OCTOBER 4TH AT 7:00AM EST"
+        },
+        {
+          icon: "mdi-trophy",
+          msg:
+            "<STRONG>PLAYOFF ALERT:</STRONG> THE COLUMBUS CLAPPERS ARE THE SEASON 1 SPL PREMIERE LEAGUE CHAMPIONS"
+        },
+        {
+          icon: "mdi-lock",
+          msg:
+            "<strong>ALERT:</strong> SEASON 2 SIGNUPS WILL BE CLOSING ON DECEMBER 5TH AT 11:59PM EST"
+        }
       ]
     };
   }
@@ -29,10 +43,19 @@ export default {
 
 <style lang="stylus" scoped>
 .v-application .display-2 {
-  font-size: 0.95rem !important;
+  font-size: 0.9rem !important;
   font-weight: 400;
-  line-height: 3.125rem;
+  line-height: 2.8rem;
   letter-spacing: normal !important;
   font-family: 'Roboto', sans-serif !important;
+}
+
+.v-icon {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.v-sheet {
+  border-radius: 0px;
 }
 </style>
