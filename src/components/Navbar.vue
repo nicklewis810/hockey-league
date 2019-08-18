@@ -3,10 +3,7 @@
     <v-toolbar>
       <div class="text-center">
         <v-avatar :tile="true">
-          <img
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-            alt="avatar"
-          />
+          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
         </v-avatar>
       </div>
       <v-toolbar-title>SUPER PREMIERE LEAGUE</v-toolbar-title>
@@ -22,20 +19,33 @@
 
       <template v-if="$vuetify.breakpoint.smAndUp">
         <div class="my-2">
-          <v-btn small color="primary">Sign-Up</v-btn>
+          <v-btn small color="primary" @click.stop="showSignupDialog=true">Sign-Up</v-btn>
         </div>
         <div class="my-2">
-          <v-btn small color="success">Log-In</v-btn>
+          <v-btn small color="success" @click.stop="showLoginDialog=true">Log-In</v-btn>
         </div>
       </template>
     </v-toolbar>
+    <LoginDialog v-model="showLoginDialog" />
+    <SignupDialog v-model="showSignupDialog" />
   </div>
 </template>
 
 <script>
+import LoginDialog from "./LoginDialog";
+import SignupDialog from "./SignupDialog";
+
 export default {
+  name: "Navbar",
+  components: {
+    LoginDialog,
+    SignupDialog
+  },
   data() {
-    return {};
+    return {
+      showLoginDialog: false,
+      showSignupDialog: false
+    };
   }
 };
 </script>
