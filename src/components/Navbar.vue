@@ -21,11 +21,14 @@
         <v-btn small color="primary" @click.stop="showSignupDialog=true">Sign-Up</v-btn>
         <v-btn small color="success" @click.stop="showLoginDialog=true">Login</v-btn>
       </template>
-
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list dense>
+        <v-list-item>
+          <v-btn text to="/overview">SPL</v-btn>
+        </v-list-item>
+        <v-divider></v-divider>
         <v-list-item>
           <v-btn text to="/overview">OVERVIEW</v-btn>
         </v-list-item>
@@ -63,7 +66,7 @@ export default {
     return {
       showLoginDialog: false,
       showSignupDialog: false,
-      drawer: null,
+      drawer: null
     };
   }
 };
