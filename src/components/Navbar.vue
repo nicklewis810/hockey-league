@@ -11,10 +11,11 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
-        <v-btn text>OVERVIEW</v-btn>
-        <v-btn text>SCHEDULE</v-btn>
-        <v-btn text>STANDINGS</v-btn>
-        <v-btn text>TEAMS</v-btn>
+        <v-btn text to="/overview">OVERVIEW</v-btn>
+        <v-btn text to="/scores">SCORES</v-btn>
+        <v-btn text to="/schedule">SCHEDULE</v-btn>
+        <v-btn text to="/standings">STANDINGS</v-btn>
+        <v-btn text to="/teams">TEAMS</v-btn>
       </v-toolbar-items>
 
       <template v-if="$vuetify.breakpoint.smAndUp">
