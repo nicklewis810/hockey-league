@@ -29,7 +29,7 @@ export default new Router({
     },
     {
       path: "/scores",
-      name: "SCoresPage",
+      name: "ScoresPage",
       component: ScoresPage
     },
     {
