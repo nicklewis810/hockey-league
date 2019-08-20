@@ -2,10 +2,11 @@
   <v-container>
     <v-card>
       <v-app-bar color="blue-grey darken-4" dense dark>
-        <v-toolbar-title>STANDINGS</v-toolbar-title>
+        
+        <v-toolbar-title><v-icon>mdi-trophy</v-icon> STANDINGS </v-toolbar-title>
 
         <template v-slot:extension>
-          <v-tabs v-model="tab" align-with-title background-color="transparent">
+          <v-tabs v-model="tab" fixed-tabs background-color="transparent">
             <v-tab v-for="league in leagues" :key="league">{{ league }}</v-tab>
           </v-tabs>
         </template>
