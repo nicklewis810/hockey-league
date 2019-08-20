@@ -7,7 +7,6 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
             v-model="username"
-            :rules="nameRules"
             label="Username"
             prepend-icon="mdi-account"
             required
@@ -15,7 +14,6 @@
 
           <v-text-field
             v-model="password"
-            :rules="passwordRules"
             label="Password"
             prepend-icon="mdi-lock-question"
             required
@@ -46,8 +44,15 @@ export default {
         this.$emit("input", value);
       }
     }
+  },
+data() {
+    return {
+      valid: '',
+      username: '',
+      password: '',
+    }
   }
-};
+  };
 </script>
 
 <style lang="stylus" scoped>
