@@ -5,7 +5,7 @@
         <v-sheet :color="colors[i]" height="100%">
           <v-row class="fill-height" align="center" justify="center">
             <v-icon medium id="slide-icon" v-text="slide.icon"></v-icon>
-            <div v-html="slide.msg" id="text" class="display-2"></div>
+            <div v-html="slide.msg" id="text" class="display-2"></div> 
             <v-icon medium id="slide-icon" v-text="slide.icon"></v-icon>
           </v-row>
         </v-sheet>

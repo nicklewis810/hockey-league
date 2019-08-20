@@ -1,8 +1,10 @@
 <template>
   <v-app>
     <div>
-      <AlertBar />
-      <Navbar />
+      <container>
+        <AlertBar />
+        <Navbar />
+      </container>
 
       <router-view></router-view>
     </div>
@@ -24,3 +26,10 @@ export default {
   })
 };
 </script>
+
+
+<style lang="stylus" scoped>
+body {
+  background-color: black;
+}
+</style>
