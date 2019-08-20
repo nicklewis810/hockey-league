@@ -2,12 +2,10 @@
   <div>
     <v-container>
       <v-row>
-        <v-col>
-          <v-card>
-            <v-card-title>i am the scores page</v-card-title>
-            <v-card-text>scores components go here</v-card-text>
-          </v-card>
-        </v-col>
+        <v-card>
+          <v-divider></v-divider>
+          <v-divider></v-divider>
+        </v-card>
       </v-row>
     </v-container>
   </div>
@@ -17,5 +15,4 @@
 export default {};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

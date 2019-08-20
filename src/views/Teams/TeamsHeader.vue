@@ -71,5 +71,6 @@ export default {};
 
 .button-col {
   padding-left: 32px;
+  padding-top: 32px;
 }
 </style>
