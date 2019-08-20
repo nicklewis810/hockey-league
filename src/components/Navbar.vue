@@ -2,10 +2,13 @@
   <div>
     <v-app-bar color="blue-grey darken-4" dark>
       <v-app-bar-nav-icon v-if="$vuetify.breakpoint.mdAndDown" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-divider class="mx-2" inset vertical v-if="$vuetify.breakpoint.mdAndDown"></v-divider>
+
       <v-avatar :tile="true">
         <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
       </v-avatar>
-      <v-toolbar-title>SUPER PREMIERE LEAGUE</v-toolbar-title>
+
+      <v-toolbar-title class>SUPER PREMIERE LEAGUE</v-toolbar-title>
 
       <v-spacer></v-spacer>
 

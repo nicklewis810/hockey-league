@@ -1,161 +1,70 @@
 <template>
-  <v-container>
+  <div>
+    <v-app-bar class="" color="" prominent>
+      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
+      <v-toolbar-title class="display-2 font-weight-black pl-6">
+        <v-icon class="display-2 pb-2" color="black">mdi-trophy</v-icon>
+        STANDINGS
+        </v-toolbar-title>
+      <template v-slot:extension>
+        <v-tabs v-model="tab" background-color="transparent" show-arrows>
+          <v-tab v-for="league in leagues" :key="league">{{ league }}</v-tab>
+        </v-tabs>
+      </template>
+    </v-app-bar>
+
     <v-card>
-      <v-app-bar color="blue-grey darken-4" dense dark>
-        
-        <v-toolbar-title><v-icon>mdi-trophy</v-icon> STANDINGS </v-toolbar-title>
-
-        <template v-slot:extension>
-          <v-tabs v-model="tab" fixed-tabs background-color="transparent">
-            <v-tab v-for="league in leagues" :key="league">{{ league }}</v-tab>
-          </v-tabs>
-        </template>
-      </v-app-bar>
-
       <v-tabs-items v-model="tab">
         <v-tab-item>
-          <v-app-bar color="red accent-4" dense dark>
-            <v-toolbar-title>Premier League</v-toolbar-title>
-          </v-app-bar>
-          <v-simple-table>
-            <thead>
-              <tr>
-                <th class="text-left">Position</th>
-                <th class="text-left">Team</th>
-                <th class="text-left">GP</th>
-                <th class="text-left">W</th>
-                <th class="text-left">L</th>
-                <th class="text-left">OTL</th>
-                <th class="text-left">GF</th>
-                <th class="text-left">GA</th>
-                <th class="text-left">GD</th>
-                <th class="text-left">Points</th>
-              </tr>
-            </thead>
-            <tbody v-for="standing in this.premierStandings" :key="standing.position">
-              <tr>
-                <td>{{ standing.position }}</td>
-                <td>{{ standing.team }}</td>
-                <td>{{ standing.gamesplayed }}</td>
-                <td>{{ standing.wins }}</td>
-                <td>{{ standing.losses }}</td>
-                <td>{{ standing.overtimelosses }}</td>
-                <td>{{ standing.goalsfor }}</td>
-                <td>{{ standing.goalsagainst }}</td>
-                <td>{{ standing.goaldifferential }}</td>
-                <td>{{ standing.points }}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
+          <!-- <v-app-bar color="blue-grey darken-4" dense dark>
+              <v-toolbar-title>Premier League</v-toolbar-title>
+          </v-app-bar>-->
+          <v-data-table
+            class="elevation-5"
+            multi-sort
+            :headers="headers"
+            :items="premierStandings"
+            hide-default-footer
+            mobile-breakpoint="none"
+            calculate-widths
+          ></v-data-table>
         </v-tab-item>
         <v-tab-item>
-          <v-app-bar color="orange darken-3" dense dark>
-            <v-toolbar-title>Challenger League</v-toolbar-title>
-          </v-app-bar>
-          <v-simple-table>
-            <thead>
-              <tr>
-                <th class="text-left">Position</th>
-                <th class="text-left">Team</th>
-                <th class="text-left">GP</th>
-                <th class="text-left">W</th>
-                <th class="text-left">L</th>
-                <th class="text-left">OTL</th>
-                <th class="text-left">GF</th>
-                <th class="text-left">GA</th>
-                <th class="text-left">GD</th>
-                <th class="text-left">Points</th>
-              </tr>
-            </thead>
-            <tbody v-for="standing in this.challengerStandings" :key="standing.position">
-              <tr>
-                <td>{{ standing.position }}</td>
-                <td>{{ standing.team }}</td>
-                <td>{{ standing.gamesplayed }}</td>
-                <td>{{ standing.wins }}</td>
-                <td>{{ standing.losses }}</td>
-                <td>{{ standing.overtimelosses }}</td>
-                <td>{{ standing.goalsfor }}</td>
-                <td>{{ standing.goalsagainst }}</td>
-                <td>{{ standing.goaldifferential }}</td>
-                <td>{{ standing.points }}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
+          <v-data-table
+            class="elevation-5"
+            multi-sort
+            :headers="headers"
+            :items="challengerStandings"
+            hide-default-footer
+            mobile-breakpoint="none"
+            calculate-widths
+          ></v-data-table>
         </v-tab-item>
         <v-tab-item>
-          <v-app-bar color="amber darken-3" dense dark>
-            <v-toolbar-title>Intermediate League</v-toolbar-title>
-          </v-app-bar>
-          <v-simple-table>
-            <thead>
-              <tr>
-                <th class="text-left">Position</th>
-                <th class="text-left">Team</th>
-                <th class="text-left">GP</th>
-                <th class="text-left">W</th>
-                <th class="text-left">L</th>
-                <th class="text-left">OTL</th>
-                <th class="text-left">GF</th>
-                <th class="text-left">GA</th>
-                <th class="text-left">GD</th>
-                <th class="text-left">Points</th>
-              </tr>
-            </thead>
-            <tbody v-for="standing in this.intermediateStandings" :key="standing.position">
-              <tr>
-                <td>{{ standing.position }}</td>
-                <td>{{ standing.team }}</td>
-                <td>{{ standing.gamesplayed }}</td>
-                <td>{{ standing.wins }}</td>
-                <td>{{ standing.losses }}</td>
-                <td>{{ standing.overtimelosses }}</td>
-                <td>{{ standing.goalsfor }}</td>
-                <td>{{ standing.goalsagainst }}</td>
-                <td>{{ standing.goaldifferential }}</td>
-                <td>{{ standing.points }}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
+          <v-data-table
+            class="elevation-5"
+            multi-sort
+            :headers="headers"
+            :items="challengerStandings"
+            hide-default-footer
+            mobile-breakpoint="none"
+            calculate-widths
+          ></v-data-table>
         </v-tab-item>
         <v-tab-item>
-          <v-app-bar color="light-green darken-2" dense dark>
-            <v-toolbar-title>Open League</v-toolbar-title>
-          </v-app-bar>
-          <v-simple-table>
-            <thead>
-              <tr>
-                <th class="text-left">Position</th>
-                <th class="text-left">Team</th>
-                <th class="text-left">GP</th>
-                <th class="text-left">W</th>
-                <th class="text-left">L</th>
-                <th class="text-left">OTL</th>
-                <th class="text-left">GF</th>
-                <th class="text-left">GA</th>
-                <th class="text-left">GD</th>
-                <th class="text-left">Points</th>
-              </tr>
-            </thead>
-            <tbody v-for="standing in this.openStandings" :key="standing.position">
-              <tr>
-                <td>{{ standing.position }}</td>
-                <td>{{ standing.team }}</td>
-                <td>{{ standing.gamesplayed }}</td>
-                <td>{{ standing.wins }}</td>
-                <td>{{ standing.losses }}</td>
-                <td>{{ standing.overtimelosses }}</td>
-                <td>{{ standing.goalsfor }}</td>
-                <td>{{ standing.goalsagainst }}</td>
-                <td>{{ standing.goaldifferential }}</td>
-                <td>{{ standing.points }}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
+          <v-data-table
+            class="elevation-5"
+            multi-sort
+            :headers="headers"
+            :items="challengerStandings"
+            hide-default-footer
+            mobile-breakpoint="none"
+            calculate-widths
+          ></v-data-table>
         </v-tab-item>
       </v-tabs-items>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -163,6 +72,45 @@ export default {
   data() {
     return {
       tab: null,
+      headers: [
+        {
+          text: "",
+          align: "center",
+          sortable: false,
+          value: "position"
+        },
+        {
+          text: "Team",
+          align: "left",
+          sortable: false,
+          value: "team",
+          width: "25%"
+        },
+        {
+          text: "GP",
+          align: "left",
+          sortable: true,
+          value: "gamesplayed"
+        },
+        {
+          text: "W",
+          align: "left",
+          sortable: true,
+          value: "wins"
+        },
+        {
+          text: "L",
+          align: "left",
+          sortable: true,
+          value: "losses"
+        },
+        {
+          text: "Pts",
+          align: "left",
+          sortable: true,
+          value: "points"
+        }
+      ],
       leagues: ["Premier", "Challenger", "Intermediate", "Open"],
       premierStandings: [
         {
