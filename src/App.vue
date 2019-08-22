@@ -29,7 +29,9 @@ export default {
 
 
 <style lang="stylus" scoped>
-body {
-  background-color: black;
+.theme--light.v-application {
+  background: #fafafa;
+  color: rgba(0, 0, 0, 0.87);
+  background: #edeef0;
 }
 </style>
