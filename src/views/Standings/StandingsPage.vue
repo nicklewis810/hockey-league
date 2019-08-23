@@ -1,26 +1,36 @@
 <template>
   <div>
-    <v-app-bar class="" color="" prominent>
+    <v-app-bar class color>
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
-      <v-toolbar-title class="display-2 font-weight-black pl-6">
-        <v-icon class="display-2 pb-2" color="black">mdi-trophy</v-icon>
-        STANDINGS
-        </v-toolbar-title>
+      <v-toolbar-title class="font-weight-black">
+        <v-icon class color="black">mdi-trophy</v-icon>STANDINGS
+      </v-toolbar-title>
       <template v-slot:extension>
-        <v-tabs v-model="tab" background-color="transparent" show-arrows>
+        <v-tabs v-model="tab" background-color="transparent" fixed-tabs show-arrows>
           <v-tab v-for="league in leagues" :key="league">{{ league }}</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>
 
     <v-card>
+      <div class="ma-2">
+        <v-row class="ma-2" align="center">
+          <div class="flex-grow-1"></div>
+          <v-card class="px-4" width="125px" flat>
+            <v-select label="Season" :items="season_dropdown" placeholder="Current"></v-select>
+          </v-card>
+          <v-card class="px-4" width="200px" flat>
+            <v-select label="Season Type" :items="seasontype_dropdown" placeholder="Regular Season"></v-select>
+          </v-card>
+        </v-row>
+      </div>
+
       <v-tabs-items v-model="tab">
         <v-tab-item>
           <!-- <v-app-bar color="blue-grey darken-4" dense dark>
               <v-toolbar-title>Premier League</v-toolbar-title>
           </v-app-bar>-->
           <v-data-table
-            class="elevation-5"
             multi-sort
             :headers="headers"
             :items="premierStandings"
@@ -31,7 +41,6 @@
         </v-tab-item>
         <v-tab-item>
           <v-data-table
-            class="elevation-5"
             multi-sort
             :headers="headers"
             :items="challengerStandings"
@@ -42,7 +51,6 @@
         </v-tab-item>
         <v-tab-item>
           <v-data-table
-            class="elevation-5"
             multi-sort
             :headers="headers"
             :items="challengerStandings"
@@ -53,7 +61,6 @@
         </v-tab-item>
         <v-tab-item>
           <v-data-table
-            class="elevation-5"
             multi-sort
             :headers="headers"
             :items="challengerStandings"
@@ -72,6 +79,8 @@ export default {
   data() {
     return {
       tab: null,
+      season_dropdown: ["S1", "S2"],
+      seasontype_dropdown: ["Regular Season", "Playoffs"],
       headers: [
         {
           text: "",
@@ -115,6 +124,7 @@ export default {
       premierStandings: [
         {
           position: 1,
+          logo: "",
           team: "Columbus Clappers",
           gamesplayed: 30,
           wins: 22,
