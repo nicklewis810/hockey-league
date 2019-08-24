@@ -1,33 +1,40 @@
 <template>
   <div>
-    <v-container class="header-container">
-      <v-card elevation="0">
-        <v-row justify="space-between">
-          <v-col xl="6" lg="6" md="6" sm="6" cols="9">
-            <v-card-title class="teamheader">PREMIER LEAGUE TEAMS</v-card-title>
+    <v-app-bar flat prominent color="blue">
+      <v-container fill-height>
+        <v-row
+          align="center"
+          justify="center"
+          justify-xs="center"
+          justify-sm="center"
+          justify-md="start"
+          justify-lg="start"
+        >
+          <v-col xl="4" lg="4" md="5" sm="3" cols="3">
+            <v-toolbar-title>TEAMS</v-toolbar-title>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col class="button-col" cols="12" sm="4" xl="4" lg="4" md="4">
-            <v-overflow-btn
-              class="my-1"
-              :items="dropdown_icon"
-              label="Season"
-              segmented
-              target="#dropdown-example"
-            ></v-overflow-btn>
-          </v-col>
-          <v-col class="button-col" cols="12" sm="4" xl="4" lg="4" md="4">
-            <v-overflow-btn
-              class="my-1"
-              :items="dropdown_icon"
-              label="Division"
-              segmented
-              target="#dropdown-example"
-            ></v-overflow-btn>
-          </v-col>
-        </v-row>
-      </v-card>
+      </v-container>
+    </v-app-bar>
+    <v-divider></v-divider>
+
+    <v-container align="end">
+      <v-row
+        align="center"
+        justify="center"
+        justify-xs="center"
+        justify-sm="center"
+        justify-md="end"
+        justify-lg="end"
+      >
+        <v-col xl="3" lg="3" md="4" sm="5" cols="4">
+          <v-select append-icon="mdi-calendar" dense :items="items" label="Season" outlined></v-select>
+        </v-col>
+        <v-col xl="3" lg="3" md="4" sm="5" cols="4">
+          <v-select append-icon="mdi-hockey-sticks" dense :items="items" label="Division" outlined></v-select>
+        </v-col>
+      </v-row>
+      <v-divider></v-divider>
     </v-container>
   </div>
 </template>
@@ -49,28 +56,12 @@ export default {};
 #teamsheader {
   color: #4f4f4f;
   font-weight: 500;
+  font-size: 28px;
 }
 
 .v-card__text {
   font-size: 1rem;
   font-weight: 400;
   color: #4f4f4f;
-}
-
-.header-container {
-  margin-top: 50px;
-
-  padding: 0px;
-  outline: 1px solid #e0e0e0;
-}
-
-.card-container {
-  padding-top: 0px;
-  margin-top: 0px;
-}
-
-.button-col {
-  padding-left: 32px;
-  padding-top: 32px;
 }
 </style>
