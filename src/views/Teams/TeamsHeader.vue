@@ -27,10 +27,10 @@
         justify-md="end"
         justify-lg="end"
       >
-        <v-col xl="3" lg="3" md="4" sm="4" cols="5">
+        <v-col xl="3" lg="2" md="4" sm="4" cols="5">
           <v-select append-icon="mdi-calendar" dense :items="seasons" label="Season" outlined></v-select>
         </v-col>
-        <v-col xl="3" lg="3" md="4" sm="4" cols="5">
+        <v-col xl="2" lg="2" md="4" sm="4" cols="5">
           <v-select
             append-icon="mdi-hockey-sticks"
             dense
@@ -49,7 +49,7 @@
 export default {
   data() {
     return {
-      seasons: ["19' Spring", "20' Summer", "20' Fall", "'20' Winter"],
+      seasons: ["Season 1", "Season 2", "Season 3", "Season 4"],
       divisions: ["Premier", "Challenger", "Intermediate", "Open"]
     };
   }

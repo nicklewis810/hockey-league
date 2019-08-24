@@ -11,11 +11,11 @@
             :value="value"
           >
             <v-card :elevation="hover ? 12 : 2">
-              <v-card-title class="justify-center">AUSTIN TINCANS</v-card-title>
+              <v-card-title class="justify-center">TORONTO TURTLES</v-card-title>
               <v-divider></v-divider>
               <div class="text-center">
-                <v-avatar size="50" color="grey lighten-5">
-                  <img src="~@/assets/logo_cans.png" alt="No Image Found" />
+                <v-avatar size="75">
+                  <img src="~@/assets/logo_turtles.png" alt="No Image Found" />
                 </v-avatar>
               </div>
               <v-divider></v-divider>
@@ -41,8 +41,6 @@ export default {};
 }
 
 .v-card__title.justify-center {
-  font-size: 1em;
   font-weight: 400;
-  color: #4f4f4f;
 }
 </style>
