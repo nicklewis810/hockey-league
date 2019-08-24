@@ -1,21 +1,136 @@
 <template>
   <div>
-    <v-app-bar class color>
+    <v-card class="ma-0" :tile="true">
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
-      <v-toolbar-title class="font-weight-black">
+      <!-- <v-toolbar-title class="font-weight-black">
         <v-icon class color="black">mdi-trophy</v-icon>STANDINGS
-      </v-toolbar-title>
-      <template v-slot:extension>
-        <v-tabs v-model="tab" background-color="transparent" fixed-tabs show-arrows>
+      </v-toolbar-title>-->
+      <!-- <v-select :items="leagues"></v-select> -->
+
+      <v-card class color="blue-grey darken-4" dark elevation="5">
+        <v-toolbar-title class="font-weight-black">
+          <v-icon class="ma-2">mdi-trophy</v-icon>STANDINGS
+        </v-toolbar-title>
+        <v-tabs
+          v-model="tab"
+          class
+          background-color="transparent"
+          color
+          fixed-tabs
+          show-arrows
+          slider-size="5"
+        >
           <v-tab v-for="league in leagues" :key="league">{{ league }}</v-tab>
         </v-tabs>
-      </template>
-    </v-app-bar>
 
-    <v-card>
-      <div class="ma-2">
-        <v-row class="ma-2" align="center">
-          <div class="flex-grow-1"></div>
+        <v-tabs-items v-model="tab" dark>
+          <!--Premier League -->
+          <v-tab-item>
+            <v-list color="blue-grey darken-4">
+              <v-card-title>Regular Season</v-card-title>
+              <v-divider></v-divider>
+              <v-list-item
+                two-line
+                v-for="(team, index) in this.premierStandings"
+                :key="team.premierStandings"
+                v-model="sortedPremier"
+              >
+                <v-list-item-icon>
+                  <v-icon>{{index +1}}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-icon>
+                  <img v-bind:src="team.logo" />
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>{{team.team}}</v-list-item-title>
+                  <v-list-item-subtitle>{{team.wins}}W-{{team.losses}}L, {{team.points}}Pts</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-tab-item>
+
+          <!--Challenger League -->
+          <v-tab-item>
+            <v-list color="blue-grey darken-4">
+              <v-card-title>Regular Season</v-card-title>
+              <v-divider></v-divider>
+              <v-list-item
+                two-line
+                v-for="(team, index) in this.challengerStandings"
+                :key="team.challengerStandings"
+                v-model="sortedChallenger"
+              >
+                <v-list-item-icon>
+                  <v-icon>{{index +1}}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-icon>
+                  <img v-bind:src="logo"></img>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>{{team.team}}</v-list-item-title>
+                  <v-list-item-subtitle>{{team.wins}}W-{{team.losses}}L, {{team.points}}Pts</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-tab-item>
+
+          <!--Intermediate League -->
+          <v-tab-item>
+            <v-list color="blue-grey darken-4">
+              <v-card-title>Regular Season</v-card-title>
+              <v-divider></v-divider>
+              <v-list-item
+                two-line
+                v-for="(team, index) in this.intermediateStandings"
+                :key="team.intermediateStandings"
+                v-model="sortedIntermediate"
+              >
+                <v-list-item-icon>
+                  <v-icon>{{index +1}}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-icon>
+                  <v-icon color="pink">{{team.logo}}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>{{team.team}}</v-list-item-title>
+                  <v-list-item-subtitle>{{team.wins}}W-{{team.losses}}L, {{team.points}}Pts</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-tab-item>
+
+          <!--Open League -->
+          <v-tab-item>
+            <v-list color="blue-grey darken-4">
+              <v-card-title>Regular Season</v-card-title>
+              <v-divider></v-divider>
+              <v-list-item
+                two-line
+                v-for="team in this.openStandings"
+                :key="team.openStandings"
+                v-model="sortedOpen"
+              >
+                <v-list-item-icon>
+                  <v-icon>{{team.position}}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-icon>
+                  <v-icon color="pink">{{team.logo}}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>{{team.team}}</v-list-item-title>
+                  <v-list-item-subtitle>{{team.wins}}W-{{team.losses}}L, {{team.points}}Pts</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-card>
+    </v-card>
+
+    <!-- Filters for Season/Stage
+      <div elevation="5">
+      <div class="mt-2">
+        <v-row class="px-4" justify="end">
           <v-card class="px-4" width="125px" flat>
             <v-select label="Season" :items="season_dropdown" placeholder="Current"></v-select>
           </v-card>
@@ -23,13 +138,11 @@
             <v-select label="Season Type" :items="seasontype_dropdown" placeholder="Regular Season"></v-select>
           </v-card>
         </v-row>
-      </div>
+    </div>-->
 
-      <v-tabs-items v-model="tab">
+    <!-- Data Table for Standings -->
+    <!-- <v-tabs-items v-model="tab">
         <v-tab-item>
-          <!-- <v-app-bar color="blue-grey darken-4" dense dark>
-              <v-toolbar-title>Premier League</v-toolbar-title>
-          </v-app-bar>-->
           <v-data-table
             multi-sort
             :headers="headers"
@@ -69,13 +182,27 @@
             calculate-widths
           ></v-data-table>
         </v-tab-item>
-      </v-tabs-items>
-    </v-card>
+    </v-tabs-items>-->
   </div>
 </template>
 
 <script>
+import { isNull } from "util";
 export default {
+  computed: {
+    sortedPremier: function() {
+      this.premierStandings.sort((a, b) => b.points - a.points);
+    },
+    sortedChallenger: function() {
+      this.challengerStandings.sort((a, b) => b.points - a.points);
+    },
+    sortedIntermediate: function() {
+      this.intermediateStandings.sort((a, b) => b.points - a.points);
+    },
+    sortedOpen: function() {
+      this.openStandings.sort((a, b) => b.points - a.points);
+    }
+  },
   data() {
     return {
       tab: null,
@@ -137,6 +264,7 @@ export default {
         },
         {
           position: 2,
+          logo: "./assets/logo_titanics.png",
           team: "New York Titanics",
           gamesplayed: 30,
           wins: 20,
@@ -181,13 +309,13 @@ export default {
           goalsfor: 111,
           goalsagainst: 163,
           goaldifferential: "-52",
-          points: 16
+          points: 55
         }
       ],
       challengerStandings: [
         {
           position: 1,
-          team: "Scranton Danglers",
+          team: "Team 1",
           gamesplayed: 30,
           wins: 22,
           losses: 5,
@@ -207,7 +335,7 @@ export default {
           goalsfor: 152,
           goalsagainst: 137,
           goaldifferential: "+15",
-          points: 42
+          points: 50
         },
         {
           position: 3,
@@ -219,7 +347,7 @@ export default {
           goalsfor: 155,
           goalsagainst: 150,
           goaldifferential: "+5",
-          points: 33
+          points: 5
         },
         {
           position: 4,
@@ -231,7 +359,7 @@ export default {
           goalsfor: 128,
           goalsagainst: 142,
           goaldifferential: "-14",
-          points: 22
+          points: 47
         },
         {
           position: 5,

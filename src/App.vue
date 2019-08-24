@@ -1,10 +1,9 @@
 <template>
   <v-app>
     <div>
-      <container>
+
         <AlertBar />
         <Navbar />
-      </container>
 
       <router-view></router-view>
     </div>
