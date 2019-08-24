@@ -8,12 +8,13 @@
       <!-- <v-select :items="leagues"></v-select> -->
 
       <v-card class color="blue-grey darken-4" dark elevation="5">
-        <v-toolbar-title class="font-weight-black">
-          <v-icon class="ma-2">mdi-trophy</v-icon>STANDINGS
+        <v-container class="text-center">
+        <v-toolbar-title class="display-2 font-weight-black">
+          <v-icon class="display-2 mt-n2">mdi-trophy</v-icon>STANDINGS
         </v-toolbar-title>
+        </v-container>
         <v-tabs
           v-model="tab"
-          class
           background-color="transparent"
           color
           fixed-tabs
@@ -27,7 +28,7 @@
           <!--Premier League -->
           <v-tab-item>
             <v-list color="blue-grey darken-4">
-              <v-card-title>Regular Season</v-card-title>
+              <v-card-title class="title">Regular Season</v-card-title>
               <v-divider></v-divider>
               <v-list-item
                 two-line
@@ -36,14 +37,14 @@
                 v-model="sortedPremier"
               >
                 <v-list-item-icon>
-                  <v-icon>{{index +1}}</v-icon>
+                  <v-list-item-content>{{index +1}}</v-list-item-content>
                 </v-list-item-icon>
                 <v-list-item-icon>
-                  <img v-bind:src="team.logo" />
+                  <img v-bind:src="team.logo" width="50px" class="pr-3 pt-2"/>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>{{team.team}}</v-list-item-title>
-                  <v-list-item-subtitle>{{team.wins}}W-{{team.losses}}L, {{team.points}}Pts</v-list-item-subtitle>
+                  <v-list-item-subtitle>{{team.wins}}W-{{team.losses}}L, {{team.wins *2}}Pts</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -52,7 +53,7 @@
           <!--Challenger League -->
           <v-tab-item>
             <v-list color="blue-grey darken-4">
-              <v-card-title>Regular Season</v-card-title>
+              <v-card-title class="title">Regular Season</v-card-title>
               <v-divider></v-divider>
               <v-list-item
                 two-line
@@ -64,11 +65,11 @@
                   <v-icon>{{index +1}}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-icon>
-                  <img v-bind:src="logo"></img>
+                  <img v-bind:src="team.logo" />
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>{{team.team}}</v-list-item-title>
-                  <v-list-item-subtitle>{{team.wins}}W-{{team.losses}}L, {{team.points}}Pts</v-list-item-subtitle>
+                  <v-list-item-subtitle>{{team.wins}}W-{{team.losses}}L, {{team.wins *2}}Pts</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -191,16 +192,21 @@ import { isNull } from "util";
 export default {
   computed: {
     sortedPremier: function() {
-      this.premierStandings.sort((a, b) => b.points - a.points);
+      this.premierStandings.sort((a, b) => ((b.wins * 2) - (a.wins * 2)));
     },
     sortedChallenger: function() {
-      this.challengerStandings.sort((a, b) => b.points - a.points);
+      this.challengerStandings.sort((a, b) => ((b.wins * 2) - (a.wins * 2)));
     },
     sortedIntermediate: function() {
       this.intermediateStandings.sort((a, b) => b.points - a.points);
     },
     sortedOpen: function() {
       this.openStandings.sort((a, b) => b.points - a.points);
+    },
+    pointTotal: function() {
+      const total = this.premierStandings.wins *2;
+      this.premierStandings.points = total;
+      console.log(total);
     }
   },
   data() {
@@ -251,65 +257,58 @@ export default {
       premierStandings: [
         {
           position: 1,
-          logo: "",
+          logo: require('@/assets/logo_clappers.png'),
           team: "Columbus Clappers",
           gamesplayed: 30,
           wins: 22,
           losses: 5,
-          overtimelosses: 3,
           goalsfor: 159,
           goalsagainst: 145,
           goaldifferential: "+14",
-          points: 45
         },
         {
           position: 2,
-          logo: "./assets/logo_titanics.png",
+          logo: require('@/assets/logo_titanics.png'),
           team: "New York Titanics",
           gamesplayed: 30,
           wins: 20,
           losses: 8,
-          overtimelosses: 2,
           goalsfor: 152,
           goalsagainst: 137,
           goaldifferential: "+15",
-          points: 42
         },
         {
           position: 3,
-          team: "St. Louis Storm",
+          logo: require('@/assets/logo_turtles.png'),
+          team: "Toronto Turtles",
           gamesplayed: 30,
           wins: 16,
           losses: 13,
-          overtimelosses: 1,
           goalsfor: 155,
           goalsagainst: 150,
           goaldifferential: "+5",
-          points: 33
         },
         {
           position: 4,
+          logo: require('@/assets/logo_slappers.png'),
           team: "DC Slappers",
           gamesplayed: 30,
           wins: 10,
           losses: 18,
-          overtimelosses: 2,
           goalsfor: 128,
           goalsagainst: 142,
           goaldifferential: "-14",
-          points: 22
         },
         {
           position: 5,
+          logo: require('@/assets/logo_talkies.png'),
           team: "Milwaukee Talkies",
           gamesplayed: 30,
           wins: 7,
           losses: 21,
-          overtimelosses: 2,
           goalsfor: 111,
           goalsagainst: 163,
           goaldifferential: "-52",
-          points: 55
         }
       ],
       challengerStandings: [
@@ -319,11 +318,9 @@ export default {
           gamesplayed: 30,
           wins: 22,
           losses: 5,
-          overtimelosses: 3,
           goalsfor: 159,
           goalsagainst: 145,
           goaldifferential: "+14",
-          points: 45
         },
         {
           position: 2,
@@ -331,11 +328,9 @@ export default {
           gamesplayed: 30,
           wins: 20,
           losses: 8,
-          overtimelosses: 2,
           goalsfor: 152,
           goalsagainst: 137,
           goaldifferential: "+15",
-          points: 50
         },
         {
           position: 3,
@@ -343,11 +338,9 @@ export default {
           gamesplayed: 30,
           wins: 16,
           losses: 13,
-          overtimelosses: 1,
           goalsfor: 155,
           goalsagainst: 150,
           goaldifferential: "+5",
-          points: 5
         },
         {
           position: 4,
@@ -355,11 +348,9 @@ export default {
           gamesplayed: 30,
           wins: 10,
           losses: 18,
-          overtimelosses: 2,
           goalsfor: 128,
           goalsagainst: 142,
           goaldifferential: "-14",
-          points: 47
         },
         {
           position: 5,
@@ -367,11 +358,9 @@ export default {
           gamesplayed: 30,
           wins: 7,
           losses: 21,
-          overtimelosses: 2,
           goalsfor: 111,
           goalsagainst: 163,
           goaldifferential: "-52",
-          points: 16
         }
       ],
       intermediateStandings: [""],
