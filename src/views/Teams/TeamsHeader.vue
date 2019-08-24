@@ -27,11 +27,17 @@
         justify-md="end"
         justify-lg="end"
       >
-        <v-col xl="3" lg="3" md="4" sm="5" cols="4">
-          <v-select append-icon="mdi-calendar" dense :items="items" label="Season" outlined></v-select>
+        <v-col xl="3" lg="3" md="4" sm="4" cols="5">
+          <v-select append-icon="mdi-calendar" dense :items="seasons" label="Season" outlined></v-select>
         </v-col>
-        <v-col xl="3" lg="3" md="4" sm="5" cols="4">
-          <v-select append-icon="mdi-hockey-sticks" dense :items="items" label="Division" outlined></v-select>
+        <v-col xl="3" lg="3" md="4" sm="4" cols="5">
+          <v-select
+            append-icon="mdi-hockey-sticks"
+            dense
+            :items="divisions"
+            label="Division"
+            outlined
+          ></v-select>
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -40,10 +46,25 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      seasons: ["19' Spring", "20' Summer", "20' Fall", "'20' Winter"],
+      divisions: ["Premier", "Challenger", "Intermediate", "Open"]
+    };
+  }
+};
 </script>
 
 <style lang="scss" scoped>
+.v-toolbar__title {
+  font-size: 3rem;
+  color: white;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .v-card__title {
   font-size: 2.5rem;
   font-weight: 600;
