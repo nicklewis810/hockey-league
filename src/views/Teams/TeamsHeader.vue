@@ -28,7 +28,13 @@
         justify-lg="end"
       >
         <v-col xl="3" lg="2" md="4" sm="4" cols="5">
-          <v-select append-icon="mdi-calendar" dense :items="seasons" label="Season" outlined></v-select>
+          <v-select
+            append-icon="mdi-calendar"
+            dense
+            :items="seasons"
+            label="Season"
+            outlined
+          ></v-select>
         </v-col>
         <v-col xl="2" lg="2" md="4" sm="4" cols="5">
           <v-select
